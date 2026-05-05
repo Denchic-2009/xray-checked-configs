@@ -30,7 +30,7 @@ BASE_SOCKS_PORT = 10800               # starting port for temporary SOCKS proxie
 CHECK_URL = "https://www.gstatic.com/generate_204"
 REQUEST_TIMEOUT = 10                  # seconds for the HTTP request
 XRAY_STARTUP_DELAY = 1.5              # seconds to wait for Xray to start listening
-MAX_WORKERS = 1                       # parallel checks (set 1 to avoid overload)
+MAX_WORKERS = 20                       # parallel checks (set 1 to avoid overload)
 
 logging.basicConfig(
     level=logging.INFO,
