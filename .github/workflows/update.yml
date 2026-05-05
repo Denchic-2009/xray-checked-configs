@@ -1,0 +1,51 @@
+name: Update VPN Configs
+
+on:
+  schedule:
+    # Каждый час (UTC). Можно изменить под себя
+    - cron: '0 * * * *'
+  workflow_dispatch:   # позволяет запускать вручную из интерфейса
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout репозитория
+        uses: actions/checkout@v4
+
+      - name: 🐍 Установка Python и зависимостей
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Установка pip-зависимостей
+        run: pip install requests[socks] schedule
+
+      - name: 🔽 Скачивание Xray
+        run: |
+          wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip Xray-linux-64.zip
+          chmod +x xray
+          sudo mv xray /usr/local/bin/
+
+      - name: 🧹 Запуск fetcher.py (получение config.txt)
+        run: python fetcher.py
+        timeout-minutes: 10
+
+      - name: 🔍 Запуск checker.py (проверка через Xray, conf_ck.txt)
+        run: python checker.py
+        timeout-minutes: 20
+
+      - name: 📤 Коммит и пуш новых config.txt и conf_ck.txt
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add config.txt conf_ck.txt
+          if git diff --cached --quiet; then
+            echo "Нет изменений, пропускаем коммит"
+          else
+            git commit -m "🔄 Автообновление конфигов $(date -u +'%Y-%m-%d %H:%M')"
+            git push
+          fi
