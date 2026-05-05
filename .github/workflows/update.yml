@@ -36,7 +36,7 @@ jobs:
 
       - name: 🔍 Запуск checker.py (проверка через Xray, conf_ck.txt)
         run: python checker.py
-        timeout-minutes: 20
+        timeout-minutes: 35
 
       - name: 📤 Коммит и пуш новых config.txt и conf_ck.txt
         run: |
