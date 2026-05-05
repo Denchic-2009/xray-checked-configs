@@ -24,11 +24,11 @@ jobs:
         run: pip install requests[socks] schedule
 
       - name: 🔽 Скачивание Xray
-        run: |
-          wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip Xray-linux-64.zip
-          chmod +x xray
-          sudo mv xray /usr/local/bin/
+  run: |
+    wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+    unzip -o Xray-linux-64.zip xray geoip.dat geosite.dat
+    chmod +x xray
+    sudo mv xray /usr/local/bin/
 
       - name: 🧹 Запуск fetcher.py (получение config.txt)
         run: python fetcher.py
