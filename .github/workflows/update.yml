@@ -11,7 +11,7 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
 
     steps:
       - name: 📥 Checkout репозитория
@@ -22,32 +22,42 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: 📦 Установка pip-зависимостей
-        run: pip install requests[socks] schedule ip2geotools
+      - name: 📦 Установка Python зависимостей
+        run: |
+          pip install --upgrade pip
+          pip install aiohttp geoip2
+
+      - name: 🌍 Скачивание GeoIP базы
+        run: |
+          echo "Downloading GeoLite2-Country.mmdb..."
+          curl -L -o GeoLite2-Country.mmdb https://git.io/GeoLite2-Country.mmdb
+          ls -lh GeoLite2-Country.mmdb
 
       - name: 🔽 Скачивание Xray
         run: |
-          wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          wget -q https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
           unzip -o Xray-linux-64.zip xray geoip.dat geosite.dat
           chmod +x xray
           sudo mv xray /usr/local/bin/
 
-      - name: 🧹 Запуск fetcher.py (получение config.txt, config_ru.txt, config_other.txt)
+      - name: 🧹 Запуск fetcher.py
         run: python fetcher.py
-        timeout-minutes: 10
+        timeout-minutes: 12
 
-      - name: 🔍 Запуск checker.py (проверка через Xray, conf_ck.txt)
+      - name: 🔍 Запуск checker.py
         run: python checker.py
-        timeout-minutes: 20
+        timeout-minutes: 22
 
-      - name: 📤 Коммит и пуш всех обновлённых конфигов
+      - name: 📤 Коммит и пуш изменений
         run: |
-          git config user.name "github-actions"
+          git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
+          
           git add config.txt config_ru.txt config_other.txt conf_ck.txt
+          
           if git diff --cached --quiet; then
             echo "Нет изменений, пропускаем коммит"
           else
-            git commit -m "🔄 Автообновление конфигов $(date -u +'%Y-%m-%d %H:%M')"
+            git commit -m "🔄 Автообновление конфигов $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi
