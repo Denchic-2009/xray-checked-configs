@@ -5,6 +5,8 @@ import time
 import logging
 import subprocess
 import requests
+import base64
+import socket
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse, parse_qs
@@ -12,35 +14,52 @@ from urllib.parse import urlparse, parse_qs
 # --- Конфигурация ---
 CONFIG_INPUT = Path("config.txt")
 OUTPUT_FILE = Path("conf_ck.txt")
-XRAY_BIN = "xray"  # Убедитесь, что xray установлен в системе
+XRAY_BIN = "xray" 
 BASE_SOCKS_PORT = 10800
 CHECK_URL = "https://www.gstatic.com/generate_204"
 TIMEOUT = 10
-MAX_WORKERS = 40 
+MAX_WORKERS = 30 # Уменьшили для стабильности на слабых раннерах
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
+def wait_for_port(port: int, timeout: float = 3.0) -> bool:
+    """Ожидает, пока порт откроется."""
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            if sock.connect_ex(('127.0.0.1', port)) == 0:
+                return True
+        time.sleep(0.2)
+    return False
+
 def parse_link(link: str) -> dict:
-    """Парсит ссылку в формат outbound для Xray."""
+    """Парсит ссылки vmess/vless/trojan в формат Xray."""
     try:
         if link.startswith("vmess://"):
-            import base64
-            # Добавляем padding для корректного декодирования base64
             payload = link[8:].strip()
-            data = json.loads(base64.b64decode(payload + "==").decode())
+            # Исправляем padding для base64
+            missing_padding = len(payload) % 4
+            if missing_padding:
+                payload += '=' * (4 - missing_padding)
+            
+            data = json.loads(base64.b64decode(payload).decode())
             return {
                 "protocol": "vmess",
-                "settings": {"vnext": [{"address": data['add'], "port": int(data['port']), 
-                             "users": [{"id": data['id'], "security": "auto"}]}]},
-                "streamSettings": {"network": data.get("net", "tcp"), 
-                                   "security": "tls" if data.get("tls") == "tls" else "none"}
+                "settings": {"vnext": [{"address": data.get('add'), "port": int(data.get('port', 443)), 
+                             "users": [{"id": data.get('id'), "security": "auto"}]}]},
+                "streamSettings": {
+                    "network": data.get("net", "tcp"), 
+                    "security": "tls" if data.get("tls") == "tls" else "none",
+                    "tlsSettings": {"serverName": data.get("sni", data.get("host", ""))}
+                }
             }
         
         p = urlparse(link)
         params = parse_qs(p.query)
         net = params.get("type", ["tcp"])[0]
         security = params.get("security", ["none"])[0]
+        sni = params.get("sni", [p.hostname])[0]
 
         outbound = {
             "protocol": p.scheme,
@@ -56,10 +75,9 @@ def parse_link(link: str) -> dict:
         else:
             return None
 
-        # Обработка TLS и Reality
         if security in ["tls", "reality"]:
             key = f"{security}Settings"
-            outbound["streamSettings"][key] = {"serverName": params.get("sni", [p.hostname])[0]}
+            outbound["streamSettings"][key] = {"serverName": sni}
             if security == "reality":
                 outbound["streamSettings"][key].update({
                     "publicKey": params.get("pbk", [""])[0], 
@@ -67,11 +85,11 @@ def parse_link(link: str) -> dict:
                 })
         
         return outbound
-    except Exception:
+    except Exception as e:
         return None
 
 def test_config(link: str, port: int) -> str:
-    """Запускает Xray и проверяет соединение через прокси."""
+    """Проверка работоспособности конфига."""
     outbound = parse_link(link)
     if not outbound:
         return None
@@ -79,7 +97,7 @@ def test_config(link: str, port: int) -> str:
     config_path = Path(f"tmp_{port}.json")
     xray_config = {
         "log": {"loglevel": "none"},
-        "inbounds": [{"port": port, "protocol": "socks", "settings": {"auth": "noauth"}}],
+        "inbounds": [{"port": port, "listen": "127.0.0.1", "protocol": "socks", "settings": {"auth": "noauth"}}],
         "outbounds": [outbound, {"protocol": "freedom", "tag": "direct"}]
     }
     
@@ -87,19 +105,22 @@ def test_config(link: str, port: int) -> str:
     
     process = None
     try:
-        # Запуск Xray
         process = subprocess.Popen(
             [XRAY_BIN, "run", "-c", str(config_path)],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
-        time.sleep(1.5) # Ждем инициализации порта
-
-        proxies = {"http": f"socks5://127.0.0.1:{port}", "https": f"socks5://127.0.0.1:{port}"}
-        r = requests.get(CHECK_URL, proxies=proxies, timeout=TIMEOUT)
         
-        if r.status_code == 204:
-            logger.info(f"OK: {link[:50]}...")
-            return link
+        # Ждем реального открытия порта вместо фиксированного sleep
+        if wait_for_port(port):
+            # Используем socks5h для удаленного DNS-резолвинга
+            proxies = {
+                "http": f"socks5h://127.0.0.1:{port}",
+                "https": f"socks5h://127.0.0.1:{port}"
+            }
+            r = requests.get(CHECK_URL, proxies=proxies, timeout=TIMEOUT)
+            if r.status_code == 204 or r.status_code == 200:
+                logger.info(f"✅ OK: {link[:40]}...")
+                return link
     except Exception:
         pass
     finally:
@@ -112,24 +133,24 @@ def test_config(link: str, port: int) -> str:
 
 def main():
     if not CONFIG_INPUT.exists():
-        logger.error(f"Input file {CONFIG_INPUT} not found.")
+        logger.error(f"❌ Файл {CONFIG_INPUT} не найден!")
         return
 
-    links = [line.strip() for line in CONFIG_INPUT.read_text().splitlines() if line.strip()]
-    logger.info(f"Starting check for {len(links)} configs...")
+    links = list(set(line.strip() for line in CONFIG_INPUT.read_text().splitlines() if line.strip()))
+    logger.info(f"🔍 Начинаю проверку {len(links)} конфигов...")
 
     working_links = []
-    # Параллельное выполнение тестов
+    # Используем ThreadPool для параллельной проверки
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        # Чтобы не занимать одинаковые порты, передаем разные значения порта
         futures = [executor.submit(test_config, link, BASE_SOCKS_PORT + i) for i, link in enumerate(links)]
         for f in futures:
-            result = f.result()
-            if result:
-                working_links.append(result)
+            res = f.result()
+            if res:
+                working_links.append(res)
 
     OUTPUT_FILE.write_text("\n".join(working_links))
-    logger.info(f"Done. Found {len(working_links)} working configs. Saved to {OUTPUT_FILE}")
+    logger.info(f"🎉 Готово! Найдено рабочих: {len(working_links)}. Результат в {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
+ 
