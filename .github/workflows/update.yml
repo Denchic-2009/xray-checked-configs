@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
 
       - name: 📦 Установка pip-зависимостей
-        run: pip install requests[socks] schedule
+        run: pip install requests[socks] schedule ip2geotools
 
       - name: 🔽 Скачивание Xray
         run: |
@@ -32,7 +32,7 @@ jobs:
           chmod +x xray
           sudo mv xray /usr/local/bin/
 
-      - name: 🧹 Запуск fetcher.py (получение config.txt)
+      - name: 🧹 Запуск fetcher.py (получение config.txt, config_ru.txt, config_other.txt)
         run: python fetcher.py
         timeout-minutes: 10
 
@@ -40,11 +40,11 @@ jobs:
         run: python checker.py
         timeout-minutes: 20
 
-      - name: 📤 Коммит и пуш новых config.txt и conf_ck.txt
+      - name: 📤 Коммит и пуш всех обновлённых конфигов
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add config.txt conf_ck.txt
+          git add config.txt config_ru.txt config_other.txt conf_ck.txt
           if git diff --cached --quiet; then
             echo "Нет изменений, пропускаем коммит"
           else
