@@ -2,10 +2,13 @@
 import re
 import sys
 import asyncio
+import socket
 import logging
 import requests
 from pathlib import Path
 from typing import Set, Tuple, Optional
+
+from ip2geotools.databases.noncommercial import DbIpCity
 
 # --- Конфигурация ---
 URLS = [
@@ -19,31 +22,30 @@ URLS = [
     "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt",
 ]
 
-OUTPUT_FILE = Path("config.txt")
-# Используем (?:...) чтобы findall возвращал всю ссылку целиком
+OUTPUT_ALL = Path("config.txt")
+OUTPUT_RU = Path("config_ru.txt")
+OUTPUT_OTHER = Path("config_other.txt")
+
 PROTO_PATTERN = re.compile(r"(?:vless|vmess|trojan|ss|ssr|hysteria2)://\S+")
 TCP_TIMEOUT = 3
-MAX_CONCURRENT_CHECKS = 100 
+MAX_CONCURRENT_CHECKS = 100
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
 def get_host_port(uri: str) -> Optional[Tuple[str, int]]:
-    """Извлекает хост и порт для проверки доступности."""
+    """Извлекает хост и порт из ссылки."""
     try:
-        if "@" not in uri: return None
-        # [cite_start]Берем часть после @ и убираем параметры/фрагменты
+        if "@" not in uri:
+            return None
         address_part = uri.rsplit("@", 1)[1].split("?")[0].split("#")[0]
-
-        if "]" in address_part: # Поддержка IPv6
+        if "]" in address_part:  # IPv6
             host = address_part.split("]")[0] + "]"
             port_str = address_part.split("]")[-1].lstrip(":")
             return host, (int(port_str) if port_str else 443)
-        
-        if ":" in address_part: # IPv4:порт
+        if ":" in address_part:
             host, port = address_part.rsplit(":", 1)
             return host, int(port)
-        
         return address_part, 443
     except Exception:
         return None
@@ -58,52 +60,98 @@ async def check_tcp(host: str, port: int, semaphore: asyncio.Semaphore) -> bool:
             writer.close()
             await writer.wait_closed()
             return True
-        except:
+        except Exception:
             return False
+
+def get_country_sync(host: str) -> Optional[str]:
+    """Синхронно определяет код страны по хосту."""
+    try:
+        ip = socket.gethostbyname(host)
+        # Используем бесплатную базу IP2Location LITE
+        response = DbIpCity.get(ip, api_key="free")
+        return response.country
+    except Exception as e:
+        logger.warning(f"Не удалось определить страну для {host}: {e}")
+        return None
+
+async def get_country(host: str) -> Optional[str]:
+    """Асинхронная обёртка для get_country_sync."""
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(None, get_country_sync, host)
 
 async def fetch_and_filter():
     """Основная логика сборщика."""
-    logger.info("Fetching raw configs from sources...")
+    logger.info("Загрузка конфигов из источников...")
     raw_links: Set[str] = set()
-    
+
     for url in URLS:
         try:
             resp = requests.get(url, timeout=15)
             resp.raise_for_status()
             links = PROTO_PATTERN.findall(resp.text)
             raw_links.update(links)
-            logger.info(f"Fetched {len(links)} from {url}")
+            logger.info(f"Загружено {len(links)} из {url}")
         except Exception as e:
-            logger.warning(f"Failed to fetch {url}: {e}")
+            logger.warning(f"Ошибка загрузки {url}: {e}")
 
     if not raw_links:
-        logger.error("No configs found!")
+        logger.error("Конфиги не найдены!")
         return
 
-    logger.info(f"Deduplicated to {len(raw_links)} unique links. Checking connectivity...")
-    
+    logger.info(f"После дедупликации: {len(raw_links)} уникальных ссылок. Проверка TCP...")
+
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_CHECKS)
-    link_map = [] 
+    tasks_map = []
 
     for link in raw_links:
         hp = get_host_port(link)
         if hp:
             task = asyncio.create_task(check_tcp(hp[0], hp[1], semaphore))
-            link_map.append((link, task))
+            tasks_map.append((link, task))
 
-    if not link_map:
+    if not tasks_map:
+        logger.error("Нет ссылок для проверки.")
         return
 
-    # [cite_start]Ждем завершения всех проверок[span_4](end_span)
-    await asyncio.gather(*(task for _, task in link_map))
-    
-    alive = [link for link, task in link_map if task.result()]
-    
-    if alive:
-        OUTPUT_FILE.write_text("\n".join(sorted(alive)), encoding="utf-8")
-        logger.info(f"Successfully saved {len(alive)} alive configs to {OUTPUT_FILE}")
-    else:
-        logger.error("No alive configs found after TCP check.")
+    await asyncio.gather(*(task for _, task in tasks_map))
+
+    alive_links = [link for link, task in tasks_map if task.result()]
+    logger.info(f"Живых после TCP: {len(alive_links)}")
+
+    if not alive_links:
+        logger.error("Нет живых конфигов.")
+        return
+
+    # Сохраняем полный список
+    OUTPUT_ALL.write_text("\n".join(sorted(alive_links)), encoding="utf-8")
+    logger.info(f"Сохранён полный список в {OUTPUT_ALL}")
+
+    # Определяем страны и разделяем
+    ru_links = []
+    other_links = []
+    host_cache = {}  # кэш резолвинга страны по хосту
+
+    for link in alive_links:
+        hp = get_host_port(link)
+        if not hp:
+            other_links.append(link)  # не смогли извлечь хост – в "другие"
+            continue
+        host = hp[0]
+
+        if host not in host_cache:
+            country = await get_country(host)
+            host_cache[host] = country
+        else:
+            country = host_cache[host]
+
+        if country == "RU":
+            ru_links.append(link)
+        else:
+            other_links.append(link)
+
+    OUTPUT_RU.write_text("\n".join(sorted(ru_links)), encoding="utf-8")
+    OUTPUT_OTHER.write_text("\n".join(sorted(other_links)), encoding="utf-8")
+    logger.info(f"Российских: {len(ru_links)}, остальных: {len(other_links)}. Файлы сохранены.")
 
 if __name__ == "__main__":
     try:
