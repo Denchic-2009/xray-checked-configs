@@ -29,18 +29,18 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 def get_host_port(uri: str) -> Optional[Tuple[str, int]]:
-    [span_1](start_span)"""Извлекает хост и порт для проверки доступности [cite: 2-4]."""
+    """Извлекает хост и порт для проверки доступности."""
     try:
         if "@" not in uri: return None
-        # [cite_start]Берем часть после @ и убираем параметры/фрагменты[span_1](end_span)
+        # [cite_start]Берем часть после @ и убираем параметры/фрагменты
         address_part = uri.rsplit("@", 1)[1].split("?")[0].split("#")[0]
 
-        [span_2](start_span)if "]" in address_part: # Поддержка IPv6[span_2](end_span)
+        if "]" in address_part: # Поддержка IPv6
             host = address_part.split("]")[0] + "]"
             port_str = address_part.split("]")[-1].lstrip(":")
             return host, (int(port_str) if port_str else 443)
         
-        [span_3](start_span)if ":" in address_part: # IPv4:порт[span_3](end_span)
+        if ":" in address_part: # IPv4:порт
             host, port = address_part.rsplit(":", 1)
             return host, int(port)
         
@@ -49,7 +49,7 @@ def get_host_port(uri: str) -> Optional[Tuple[str, int]]:
         return None
 
 async def check_tcp(host: str, port: int, semaphore: asyncio.Semaphore) -> bool:
-    [span_4](start_span)"""Асинхронная проверка TCP-соединения [cite: 6-7]."""
+    """Асинхронная проверка TCP-соединения."""
     async with semaphore:
         try:
             _, writer = await asyncio.wait_for(
@@ -62,7 +62,7 @@ async def check_tcp(host: str, port: int, semaphore: asyncio.Semaphore) -> bool:
             return False
 
 async def fetch_and_filter():
-    [cite_start]"""Основная логика сборщика [cite: 9-11]."""
+    """Основная логика сборщика."""
     logger.info("Fetching raw configs from sources...")
     raw_links: Set[str] = set()
     
