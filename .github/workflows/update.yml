@@ -17,7 +17,7 @@ jobs:
       - name: 📥 Checkout репозитория
         uses: actions/checkout@v4
 
-      - name: 🐍 Установка Python и зависимостей
+      - name: 🐍 Установка Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -25,13 +25,13 @@ jobs:
       - name: 📦 Установка Python зависимостей
         run: |
           pip install --upgrade pip
-          pip install aiohttp geoip2
+          pip install aiohttp geoip2 requests[socks]  # Добавили requests и поддержку SOCKS
 
       - name: 🌍 Скачивание GeoIP базы
         run: |
           echo "Downloading GeoLite2-Country.mmdb..."
-          curl -L -o GeoLite2-Country.mmdb https://git.io/GeoLite2-Country.mmdb
-          ls -lh GeoLite2-Country.mmdb
+          # Используем актуальный источник или ваш файл
+          curl -L -o GeoLite2-Country.mmdb https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb
 
       - name: 🔽 Скачивание Xray
         run: |
