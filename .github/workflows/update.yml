@@ -1,5 +1,8 @@
 name: Update VPN Configs
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '0 * * * *'
@@ -31,11 +34,11 @@ jobs:
 
       - name: 🧹 Запуск fetcher.py (получение config.txt)
         run: python fetcher.py
-        timeout-minutes: 20
+        timeout-minutes: 10
 
       - name: 🔍 Запуск checker.py (проверка через Xray, conf_ck.txt)
         run: python checker.py
-        timeout-minutes: 35
+        timeout-minutes: 20
 
       - name: 📤 Коммит и пуш новых config.txt и conf_ck.txt
         run: |
