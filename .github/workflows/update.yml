@@ -46,7 +46,7 @@ jobs:
 
       - name: 🔍 Запуск checker.py
         run: python checker.py
-        timeout-minutes: 22
+        timeout-minutes: 30
 
       - name: 📤 Коммит и пуш изменений
         run: |
