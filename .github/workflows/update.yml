@@ -42,11 +42,7 @@ jobs:
 
       - name: 🧹 Запуск fetcher.py
         run: python fetcher.py
-        timeout-minutes: 12
-
-      - name: 🔍 Запуск checker.py
-        run: python checker.py
-        timeout-minutes: 30
+        timeout-minutes: 15
 
       - name: 📤 Коммит и пуш изменений
         run: |
