@@ -33,13 +33,6 @@ jobs:
           # Используем актуальный источник или ваш файл
           curl -L -o GeoLite2-Country.mmdb https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb
 
-      - name: 🔽 Скачивание Xray
-        run: |
-          wget -q https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o Xray-linux-64.zip xray geoip.dat geosite.dat
-          chmod +x xray
-          sudo mv xray /usr/local/bin/
-
       - name: 🧹 Запуск fetcher.py
         run: python fetcher.py
         timeout-minutes: 15
