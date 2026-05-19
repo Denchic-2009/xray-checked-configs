@@ -19,7 +19,6 @@ URLS = [
     "https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt",
     "https://wlrus.lol/confs/selected.txt",
     "https://etoneya.su/whitelist",
-    "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt", 
     "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/ss.txt", 
     "https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt", 
 ]
