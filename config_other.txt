@@ -4,7 +4,7 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0YTJyZml4b3BoZGpmZmE4S1ZBNEFh@193.29.139.206
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0YTJyZml4b3BoZGpmZmE4S1ZBNEFh@193.29.139.206:8080#%F0%9F%87%B3%F0%9F%87%B1NL-193.29.139.206-0190
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0YTJyZml4b3BoZGpmZmE4S1ZBNEFh@193.29.139.217:8080#%3E%3E%40configV2rayNG%3A%3ANL
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1REpYUnBtaTNpeXF4UTc5UGZLdjNC@195.93.253.240:14130#https://t.me/v2rayNplus
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg001269pz2.cybervena.com:50099#%F0%9F%87%B9%F0%9F%87%BCTW-36.230.59.142-0165
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo2VTNwc1Iwc1F1UXhXWG9CSEI0S1REM1lhY3dRd1MyMVh2U0V5OQ@45.129.96.62:41348#%3E%3E%40shadowproxy66%3A%3AXX
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg001286ek2.cybervena.com:50099#%F0%9F%87%B9%F0%9F%87%BCTW-61.231.11.137-0180
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg00129437x.cybervena.com:50099#%F0%9F%87%B9%F0%9F%87%BCTW-36.224.128.4-0171
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg00129437x.cybervena.com:50099#🇹🇼75771
@@ -34,9 +34,9 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHeVo1WG8waHQ0MXZZbVczSDQ=@149.28.255.6:816#%
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpLUDZGUVZtSmhsWFBndlBocncyZ25J@62.133.63.169:37096#%3E%3E%40configV2rayNG%3A%3AXX
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpLUDZGUVZtSmhsWFBndlBocncyZ25J@62.133.63.169:37096#Channel
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpLUDZGUVZtSmhsWFBndlBocncyZ25J@62.133.63.169:37096#https://t.me/v2rayNplus
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpLUDZGUVZtSmhsWFBndlBocncyZ25J@62.133.63.169:37096#برای
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpMbDZjWWZYTTVEelFiZHRNTWI3MkFfanFWbk5salUzeXFl@149.104.109.74:21273#%3E%3E%40oneclickvpnkeys%3A%3APH
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpMbDZjWWZYTTVEelFiZHRNTWI3MkFfanFWbk5salUzeXFl@149.104.109.74:21273#%F0%9F%87%BA%F0%9F%87%B8US-149.104.109.74-0173
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNaWkxNUlOVU1sc1htUlFMSzdZR3NacHF6YXdtOU13azFxb0p5VGNpTTNnPQ@k1.cover20.ir:52502#V2RFA
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpQV3BqUG8zdHFoUE40eVJa@8.209.74.72:20001#%3E%3E%40oneclickvpnkeys%3A%3ADE
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpQV3BqUG8zdHFoUE40eVJa@8.209.74.72:20001#%F0%9F%87%A9%F0%9F%87%AADE-8.209.74.72-0149
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpRQ1hEeHVEbFRUTUQ3anRnSFVqSW9q@193.29.139.199:8080#%F0%9F%87%B3%F0%9F%87%B1NL-193.29.139.199-0254
@@ -196,6 +196,7 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.7:808
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.7:8080#TEL:Father_vpn
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.7:8080#برای
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpzOExiSkNnVWlHWGVDS1ZjNjN0SEpQ@94.198.220.183:64674#%F0%9F%87%B0%F0%9F%87%BFKZ-94.198.220.183-0244
+ss://Y2hhY2hhMjAtcG9seTEzMDU6dUV1M3hRTXhCVEwwUFNNYk9tMERSOUVsRXVSY3ZWM3JhQzlsVmpXUDVuND0@net12.shaygan.site:2095#https://t.me/v2rayNplus
 ss://YWVzLTEyOC1jZmI6c2hhZG93c29ja3M=@109.201.152.181:443#%F0%9F%87%B3%F0%9F%87%B1NL-109.201.152.181-0121
 ss://YWVzLTEyOC1nY206bHZ4dWoxMXg4c2ZndDlndDZtamY=@86.106.84.196:13263#❤️‍🔥
 ss://YWVzLTEyOC1nY206bHZ4dWoxMXg4c2ZndDlndDZtamY@86.106.84.196:13263#%3E%3E%40shadowproxy66%3A%3ACH
@@ -275,6 +276,7 @@ vless://4d606920-62d7-4d28-a5c4-f8a70fe56aaa@45.206.0.29:8443?type=tcp&security=
 vless://4d606920-62d7-4d28-a5c4-f8a70fe56aaa@45.206.0.30:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=37772edff71b4167&sni=storage.yandex.net#0235
 vless://4d606920-62d7-4d28-a5c4-f8a70fe56aaa@45.206.0.31:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=37772edff71b4167&sni=storage.yandex.net#0412
 vless://4d606920-62d7-4d28-a5c4-f8a70fe56aaa@45.206.0.36:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=37772edff71b4167&sni=storage.yandex.net#0439
+vless://4d606920-62d7-4d28-a5c4-f8a70fe56aaa@uk-gthost-01.com:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=37772edff71b4167&sni=storage.yandex.net#0530
 vless://4f013568-a58b-4b04-b5dd-4d52bf1c33a4@141.193.213.20:443?security=tls&sni=amoosamiii.net&type=ws&host=amoosamiii.net&path=%2Fpoiuyws&fp=chrome&allowInsecure=0#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D
 vless://4f013568-a58b-4b04-b5dd-4d52bf1c33a4@news.microsoft.com:443?path=%2Fpoiuyws&security=tls&encryption=none&insecure=0&host=amoosamiii.net&fp=chrome&type=ws&allowInsecure=0&sni=amoosamiii.net#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D
 vless://4fb684c9-977f-4a7c-82a5-1f70fc141510@37.27.21.167:58888?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=edge&sni=yastatic.net&pbk=eq--hoi57VLU20UYXbwqiGAV9Uzr8CKh27gTof4UKF8&sid=372c05b48fe83e5b&spx=%252525252F#%F0%9F%87%AB%F0%9F%87%AE%20FI%20%7C%20%E2%80%94%20%7C%20133%20%7C%20%40ByeWhiteLists2
@@ -284,6 +286,7 @@ vless://4fb684c9-977f-4a7c-82a5-1f70fc141510@37.27.21.167:58888?type=tcp&securit
 vless://4fdec620-73bb-40a7-a8d5-2570a59f1832@45.197.134.89:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=8qHRGcCezzSu4S-Cz9l19BNRLWm4MkaSwZV3dNrLEwc&sid=d515d6cfdfe60b02&sni=storage.yandex.net#0186
 vless://509dec94-cc08-4351-9ce8-811e76e092c3@31.76.6.138:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=DbpNCOTF5G7L5lGDBUtoiUNsZ_eoKwUgZX__Xhu4nEc&sid=add6bfff300435ac&sni=console.cloud.yandex.ru#0227
 vless://509dec94-cc08-4351-9ce8-811e76e092c3@de.elorium-edge.net:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=randomized&pbk=DbpNCOTF5G7L5lGDBUtoiUNsZ_eoKwUgZX__Xhu4nEc&sid=12c2a43a160abc2f&sni=console.cloud.yandex.ru#0109
+vless://52faee73-e0fe-4661-992d-67259257170f@uk-gthost-01.com:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=ea10cd5686751ec5&sni=storage.yandex.net#0387
 vless://535e8919-c649-405a-b40f-dae7cb48552a@154.83.159.233:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=LT_0j3zQkaqgtJHvyaG24xz0IfmXUswVCTeC75Qsgjo&sid=0905b6e16602f326&sni=storage.yandex.net#0043
 vless://598160c6-982d-4b2d-8218-c8ab745f7677@45.206.0.32:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=37772edff71b4167&sni=storage.yandex.net#0436
 vless://598160c6-982d-4b2d-8218-c8ab745f7677@45.206.0.35:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=dY9SNEllJMW63xo-JdXufhmjAxB_4uFw_QMjgufjiD8&sid=37772edff71b4167&sni=storage.yandex.net#0276
@@ -359,6 +362,7 @@ vless://cc2282b8-eceb-493b-9fd2-0c898840f6ee@ch-gt-01.com:8443?type=tcp&security
 vless://d91397a6-aa9c-4ce3-903e-81c50e14fdaf@45.198.87.43:8443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&pbk=7zd9mJilgjOrg_ohtw23Vmio-pdnYqeP_r-kiWt87Cg&sid=f4b4a6365558ea2e&sni=storage.yandex.net#0021
 vless://ded3638e-ab7f-4ff8-bc60-9fc6666cff22@186.246.13.22:443?fp=firefox&mode=gun&pbk=dEdb0K8U-uTlYx8OAyuaFFbwiL0eS7ZuVsPAYdZUvyk&security=reality&serviceName=gun&sid=3e0c736d79&sni=ubuntu.ubuntuhosting.host&type=grpc#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%BA%20RU-27262
 vless://ded3638e-ab7f-4ff8-bc60-9fc6666cff22@186.246.13.22:443?type=grpc&headerType=none&security=reality&encryption=none&sni=opensuse.ubuntuhosting.host&fp=chrome&pbk=MnOvfYHyxVSo9hiIeMjwpWAGTO2WIn57rXzLPVBpSxo&sid=761ca6f001ee07&serviceName=gun#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%BA%20RU-27247
+vless://ded3638e-ab7f-4ff8-bc60-9fc6666cff22@201.51.6.180:443?fp=firefox&mode=gun&pbk=dAzTVezR-Q0P42QeJb-LDlYdqkGKSuMgIZcvSQSF3EE&security=reality&serviceName=gun&sid=b6549e&sni=fedora.ubuntuhosting.host&type=grpc#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%BA%20RU-27328
 vless://df715bf7-d073-435b-94fa-d5aa4dbbd84c@sub.qwertyvpn.h4ck.me:27189?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=QhzHhG3TRaDF3MNj1pBGT1rSPCfRJUfrzc5rBUmuRQ4&sid=65&sni=www.vk.com#0556
 vless://df715bf7-d073-435b-94fa-d5aa4dbbd84c@sub.qwertyvpn.h4ck.me:27189?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=QhzHhG3TRaDF3MNj1pBGT1rSPCfRJUfrzc5rBUmuRQ4&sid=db6dab0038&sni=www.vk.com#0350
 vless://e3479472-3d5d-4142-842a-44a32b501bd7@es1.cvs-a.com:443?security=reality&type=tcp&flow=xtls-rprx-vision&sni=es1.cvs-a.com&fp=chrome&pbk=vgmo5AxgVJfSME3mlK4ulM4HeVAn6eS2UO9wYEPNFiY&sid=bb55683efa59799d#%F0%9F%87%AA%F0%9F%87%B8%20ES%20%7C%20%E2%80%94%20%7C%20958%20%7C%20%40ByeWhiteLists2
