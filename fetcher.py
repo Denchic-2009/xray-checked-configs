@@ -16,11 +16,8 @@ URLS = [
     "https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_universal.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-SNI-RU-all.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/country/RU.txt",
-    "https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt",
     "https://wlrus.lol/confs/selected.txt",
-    "https://etoneya.su/whitelist",
-    "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/ss.txt", 
-    "https://raw.githubusercontent.com/zieng2/wl/refs/heads/main/vless_lite.txt", 
+    "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/ss.txt",  
 ]
 
 OUTPUT_ALL = Path("config.txt")
@@ -30,8 +27,8 @@ OUTPUT_OTHER = Path("config_other.txt")
 GEOIP_DB_PATH = "GeoLite2-Country.mmdb"
 
 PROTO_PATTERN = re.compile(r"(?:vless|vmess|trojan|ss|ssr|hysteria2)://\S+")
-TCP_TIMEOUT = 3
-MAX_CONCURRENT_CHECKS = 200
+TCP_TIMEOUT = 2
+MAX_CONCURRENT_CHECKS = 300
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
