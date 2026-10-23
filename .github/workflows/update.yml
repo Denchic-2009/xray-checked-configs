@@ -33,8 +33,7 @@ jobs:
       - name: 🌍 Скачивание GeoIP базы
         run: |
           echo "Downloading GeoLite2-Country.mmdb..."
-          # Используем актуальный источник или ваш файл
-          curl -L -o GeoLite2-Country.mmdb https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb
+          curl -L -o GeoLite2-Country.mmdb https://github.com
 
       - name: 🧹 Запуск fetcher.py
         run: python fetcher.py
