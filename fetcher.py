@@ -128,7 +128,7 @@ async def download_geoip():
     logger.info("Downloading GeoLite2-Country.mmdb...")
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get("https://git.io/GeoLite2-Country.mmdb", timeout=30) as resp:
+            async with session.get("https://github.com/GeoLite2-Country.mmdb", timeout=30) as resp:
                 resp.raise_for_status()
                 db_path.write_bytes(await resp.read())
         logger.info("GeoIP database downloaded successfully.")
