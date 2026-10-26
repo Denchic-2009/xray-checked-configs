@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 import requests
 
 # Настройки
-SUBSCRIPTION_URL = "https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/WHITE_LITE.txt"
+SUBSCRIPTION_URL = "https://raw.githubusercontent.com/FLAT447/v2ray-lists/refs/heads/main/WHITE_FULL.txt"
 OUTPUT_FILE = "test.txt"
 TIMEOUT = 2.0  # Таймаут TCP пинга в секундах
 MAX_WORKERS = 70  # Количество параллельных потоков для проверки
