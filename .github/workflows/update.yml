@@ -48,7 +48,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
           
-          git add config.txt config_ru.txt config_other.txt conf_ck.txt
+          git add config.txt config_ru.txt config_other.txt conf_ck.txt test.txt
           
           if git diff --cached --quiet; then
             echo "Нет изменений, пропускаем коммит"
